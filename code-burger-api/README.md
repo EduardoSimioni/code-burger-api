@@ -1,2 +1,2 @@
 # code-burger-api
- codeburger api
+ code-burger-api
