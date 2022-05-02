@@ -103,6 +103,12 @@ class OrderController {
 
     return response.json({ message: 'Status was updated' })
   }
+
+  async delete(request, response) {
+    const { id } = request.params
+    await Order.deleteOne({ _id: id })
+    return response.status(200).json({ message: 'Pedido deletado com sucesso' })
+  }
 }
 
 export default new OrderController()

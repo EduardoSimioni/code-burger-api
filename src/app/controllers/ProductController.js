@@ -27,15 +27,21 @@ class ProductController {
     const { filename: path } = request.file
     const { name, price, category_id, offer } = request.body
 
-    const product = await Product.create({
-      name,
-      price,
-      category_id,
-      path,
-      offer,
-    })
+    try {
+      const product = await Product.create({
+        name,
+        price,
+        category_id,
+        path,
+        offer,
+      })
 
-    return response.json(product)
+      return response.json(product)
+    } catch {
+      response.json({
+        message: 'error',
+      })
+    }
   }
 
   async index(request, response) {
@@ -101,6 +107,14 @@ class ProductController {
     )
 
     return response.status(200).json()
+  }
+
+  async delete(request, response) {
+    const { id } = request.params
+    await Product.destroy({
+      where: { id },
+    })
+    return response.status(204).json()
   }
 }
 

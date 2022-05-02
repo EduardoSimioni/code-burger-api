@@ -80,6 +80,14 @@ class CategoryController {
 
     return response.status(200).json()
   }
+
+  async delete(request, response) {
+    const { id } = request.params
+    await Category.destroy({
+      where: { id },
+    })
+    return response.status(204).json()
+  }
 }
 
 export default new CategoryController()
